@@ -18,35 +18,35 @@ exports.addReportOfService = async (req, res, next) => {
   });
 };
 
-// //create Quotation of Service/Repair in a vehicle
-// exports.createQuotation = async (req, res, next) => {
-//   const newdata = {
-//     items: req.body.items,
-//     totPrice: req.body.totPrice,
-//     specialNote: req.body.specialNote,
-//   };
+//create Quotation of Service/Repair in a vehicle
+exports.createQuotation = async (req, res, next) => {
+  const newdata = {
+    items: req.body.items,
+    totPrice: req.body.totPrice,
+    specialNote: req.body.specialNote,
+  };
 
-//   let quotationOfService = await Service.findByIdAndUpdate(
-//     req.params.id,
-//     newdata,
-//     {
-//       new: true,
-//       runValidators: true,
-//       useFindAndModify: false,
-//     }
-//   );
+  let quotationOfService = await Service.findByIdAndUpdate(
+    req.params.id,
+    newdata,
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
 
-//   if (!quotationOfService) {
-//     res.status(400).json({
-//       success: false,
-//     });
-//   }
+  if (!quotationOfService) {
+    res.status(400).json({
+      success: false,
+    });
+  }
 
-//   res.status(200).json({
-//     success: true,
-//     quotationOfService,
-//   });
-// };
+  res.status(200).json({
+    success: true,
+    quotationOfService,
+  });
+};
 
 // //Get Details of Report of Service/Repair in a vehicle
 // exports.getReportOfService = async (req, res, next) => {
