@@ -48,23 +48,23 @@ exports.createQuotation = async (req, res, next) => {
   });
 };
 
-// //Get Details of Report of Service/Repair in a vehicle
-// exports.getReportOfService = async (req, res, next) => {
-//   const reportOfService = await Service.find();
+//Get Details of Report of Service/Repair in a vehicle
+exports.getReportOfService = async (req, res, next) => {
+  const reportOfService = await Service.find();
 
-//   if (!reportOfService) {
-//     return res.status(400).json({
-//       success: false,
-//       message: "Report of Repair/Service Details Not Found",
-//     });
-//   }
+  if (!reportOfService) {
+    return res.status(400).json({
+      success: false,
+      message: "Report of Repair/Service Details Not Found",
+    });
+  }
 
-//   res.status(200).json({
-//     success: true,
-//     reportOfService,
-//     message: "Get Report of Repair/Service Details",
-//   });
-// };
+  res.status(200).json({
+    success: true,
+    reportOfService,
+    message: "Get Report of Repair/Service Details",
+  });
+};
 
 // //Update Details of Report of Service/Repair in a vehicle
 // exports.updateReportOfService = async (req, res, next) => {
