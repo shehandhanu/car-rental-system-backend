@@ -66,29 +66,29 @@ exports.getReportOfService = async (req, res, next) => {
   });
 };
 
-// //Update Details of Report of Service/Repair in a vehicle
-// exports.updateReportOfService = async (req, res, next) => {
-//   let reportOfService = await Service.findById(req.params.id);
+//Update Details of Report of Service/Repair in a vehicle
+exports.updateReportOfService = async (req, res, next) => {
+  let reportOfService = await Service.findById(req.params.id);
 
-//   if (!reportOfService) {
-//     return res.status(400).json({
-//       success: false,
-//       message: "Report of Repair/Service Details Not Found",
-//     });
-//   }
+  if (!reportOfService) {
+    return res.status(400).json({
+      success: false,
+      message: "Report of Repair/Service Details Not Found",
+    });
+  }
 
-//   reportOfService = await Service.findByIdAndUpdate(req.params.id, req.body, {
-//     new: true,
-//     runValidators: true,
-//     useFindAndModify: false,
-//   });
+  reportOfService = await Service.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
 
-//   res.status(200).json({
-//     success: true,
-//     reportOfService,
-//     message: "Update Successfull",
-//   });
-// };
+  res.status(200).json({
+    success: true,
+    reportOfService,
+    message: "Update Successfull",
+  });
+};
 
 // //Delete Details of Report of Service/Repair in a vehicle
 // exports.deleteReportOfService = async (req, res, next) => {
