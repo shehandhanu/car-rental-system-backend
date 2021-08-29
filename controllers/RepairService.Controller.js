@@ -110,33 +110,33 @@ exports.deleteReportOfService = async (req, res, next) => {
   });
 };
 
-// //check the Report of Service/Repair in a vehicle
-// exports.checkedReportOfService = async (req, res, next) => {
-//   let reportid = req.params.id;
-//   let report = await Service.findById(reportid);
+//check the Report of Service/Repair in a vehicle
+exports.checkedReportOfService = async (req, res, next) => {
+  let reportid = req.params.id;
+  let report = await Service.findById(reportid);
 
-//   if (!report) {
-//     res.status(404).json({
-//       success: false,
-//       message: "No Report Found",
-//     });
-//   }
+  if (!report) {
+    res.status(404).json({
+      success: false,
+      message: "No Report Found",
+    });
+  }
 
-//   console.log(report);
-//   report = await Service.updateOne(
-//     { _id: reportid },
-//     { isChecked: true },
-//     {
-//       new: true,
-//       useFindAndModify: false,
-//     }
-//   );
+  console.log(report);
+  report = await Service.updateOne(
+    { _id: reportid },
+    { isChecked: true },
+    {
+      new: true,
+      useFindAndModify: false,
+    }
+  );
 
-//   console.log(report + " 22222");
-//   report = await Service.findById(reportid);
+  console.log(report + " 22222");
+  report = await Service.findById(reportid);
 
-//   res.status(200).json({
-//     success: true,
-//     report,
-//   });
-// };
+  res.status(200).json({
+    success: true,
+    report,
+  });
+};
