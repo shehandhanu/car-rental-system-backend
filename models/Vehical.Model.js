@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const vehicalSchema = new mongoose.Schema({
-
     vehicleNumber: {
         type: String,
     },
@@ -47,6 +46,14 @@ const vehicalSchema = new mongoose.Schema({
     vehicleImage: {
         type: String,
     },
+    reservations: [
+        {
+            reservationID: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'Reservation'
+            }
+        }
+    ]
 })
 
 module.exports = mongoose.model('Vehical', vehicalSchema)
