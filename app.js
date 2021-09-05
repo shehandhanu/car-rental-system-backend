@@ -14,10 +14,12 @@ app.use(cors({
 
 //Import Routes
 const user = require('./routes/User.Routes');
+const vehicals = require('./routes/Vehical.Routes');
 const empoyee = require('./routes/Employee.Routes');
 
 //use Routes
 app.use('/api/v1/user', user)
-app.use('/api/v1/employee', empoyee)
+app.use('/api/v1/vehical', vehicals)
+app.use('/api/v1/employee',empoyee)
 
 module.exports = app;
