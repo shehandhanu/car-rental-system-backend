@@ -20,7 +20,7 @@ const sendEmail = async (type, data) => {
     switch (type) {
         case 1: {
 
-            const url = `${process.env.HOSTURL}user/confirmation/${data.token}`
+            const url = `http://localhost:3000/confirmation/${data.token}`
 
             var mailOption = {
                 from: 'blackcodeteam1st@gmail.com',
@@ -56,6 +56,20 @@ const sendEmail = async (type, data) => {
 
         }
             break;
+        case 3: {
+            var mailOption = {
+                from: 'blackcodeteam1st@gmail.com',
+                to: data.user.email,
+                subject: 'Your Account Password Reset Link',
+                text: `Hi ${data.user.firstName}
+                        ${data.message}`,
+                // attachments: {
+                //     filename: 'invoice.pdf',
+                //     path: "./invoice.pdf"
+                // }
+            }
+
+        }
     }
 
     sendEmail.sendMail(mailOption, function (error, info) {
