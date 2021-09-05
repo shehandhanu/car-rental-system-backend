@@ -14,11 +14,10 @@ app.use(cors({
 
 //Import Routes
 const user = require('./routes/User.Routes');
-// const order = require('./routes/order');
+const empoyee = require('./routes/Employee.Routes');
 
 //use Routes
 app.use('/api/v1/user', user)
-// app.use('/product', product)
-// app.use('/order', order)
+app.use('/api/v1/employee', empoyee)
 
 module.exports = app;
