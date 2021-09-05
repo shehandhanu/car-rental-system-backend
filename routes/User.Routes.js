@@ -18,8 +18,20 @@ router.route('/signup').post(registerUser);
 //Email Confirmation
 router.route('/confirmation/:token').get(confirmationEmail);
 
+//Login 
+router.route('/signin').post(loginUser);
+
+//Logout
+router.route('/logout').get(logout)
+
 //Get User Profile
 router.route('/profile').get(isAuthenticatedUser, getUserProfile);
+
+//Forgot Password
+router.route('/forgotpassword').post(forgotPassword)
+
+//Reset Account Password
+router.route('/resetpassword/:token').post(resetPassword)
 
 
 module.exports = router;

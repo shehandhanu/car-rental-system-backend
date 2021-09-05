@@ -14,7 +14,6 @@ app.use(cors({
 
 //Import Routes
 const user = require('./routes/User.Routes');
-// const product = require('./routes/product');
 // const order = require('./routes/order');
 
 //use Routes
