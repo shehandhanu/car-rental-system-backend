@@ -24,6 +24,7 @@ exports.createQuotation = async (req, res, next) => {
     items: req.body.items,
     totPrice: req.body.totPrice,
     specialNote: req.body.specialNote,
+    isQutationCreated: true,
   };
 
   let quotationOfService = await Service.findByIdAndUpdate(
@@ -63,6 +64,24 @@ exports.getReportOfService = async (req, res, next) => {
     success: true,
     reportOfService,
     message: "Get Report of Repair/Service Details",
+  });
+};
+
+////Get Details of quotations
+exports.getListOfQuotations = async (req, res, next) => {
+  const quotationOfService = await Service.find();
+
+  if (!quotationOfService) {
+    return res.status(400).json({
+      success: false,
+      message: "List of Quotations Not Found",
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    quotationOfService,
+    message: "Get List of Quotations",
   });
 };
 

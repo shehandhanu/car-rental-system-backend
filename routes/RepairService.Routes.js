@@ -8,6 +8,7 @@ const {
   updateReportOfService,
   deleteReportOfService,
   checkedReportOfService,
+  getListOfQuotations,
 } = require("../controllers/RepairService.Controller");
 
 //report of repair/service
@@ -25,6 +26,10 @@ router.route("/deleteReportOfservice/:id").delete(deleteReportOfService);
 //create vehicle quotation
 router.route("/createQuotation/:id").post(createQuotation);
 
+//get list of quotations
+router.route("/getListOfQuotations").get(getListOfQuotations);
+
+//check report of services
 router.route("/checkReportOfservice/:id").get(checkedReportOfService);
 
 module.exports = router;

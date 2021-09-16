@@ -43,6 +43,10 @@ const repairServiceSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isQutationCreated: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Service", repairServiceSchema);
