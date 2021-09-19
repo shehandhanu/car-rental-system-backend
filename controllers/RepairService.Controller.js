@@ -1,3 +1,4 @@
+const { findById } = require("../models/RepairService.Model");
 const Service = require("../models/RepairService.Model");
 
 //create Report of Service/Repair in a vehicle
@@ -20,22 +21,39 @@ exports.addReportOfService = async (req, res, next) => {
 
 //create Quotation of Service/Repair in a vehicle
 exports.createQuotation = async (req, res, next) => {
-  const newdata = {
+  console.log(req.body);
+
+  let quotationOfService = await Service.findByIdAndUpdate(req.params.id, {
     items: req.body.items,
     totPrice: req.body.totPrice,
     specialNote: req.body.specialNote,
     isQutationCreated: true,
-  };
+  });
 
-  let quotationOfService = await Service.findByIdAndUpdate(
-    req.params.id,
-    newdata,
-    {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
-    }
-  );
+  if (!quotationOfService) {
+    res.status(400).json({
+      success: false,
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    quotationOfService,
+  });
+};
+
+//update Quotation of Service/Repair in a vehicle
+exports.updateQuotation = async (req, res, next) => {
+  console.log(req.body);
+
+  let quotationOfService = await Service.findByIdAndUpdate(req.params.id, {
+    type: req.body.type,
+    vehino: req.body.vehino,
+    items: req.body.items,
+    totPrice: req.body.totPrice,
+    specialNote: req.body.specialNote,
+    isQutationCreated: true,
+  });
 
   if (!quotationOfService) {
     res.status(400).json({

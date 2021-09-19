@@ -11,6 +11,7 @@ const {
   getListOfQuotations,
   deleteQuotations,
   approveQuotations,
+  updateQuotation,
 } = require("../controllers/RepairService.Controller");
 
 //report of repair/service
@@ -27,6 +28,9 @@ router.route("/deleteReportOfservice/:id").delete(deleteReportOfService);
 
 //create vehicle quotation
 router.route("/createQuotation/:id").post(createQuotation);
+
+//update vehicle quotation
+router.route("/updateQuotation/:id").post(updateQuotation);
 
 //get list of quotations
 router.route("/getListOfQuotations").get(getListOfQuotations);
