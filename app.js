@@ -15,12 +15,14 @@ app.use(cors({
 //Import Routes
 const user = require('./routes/User.Routes');
 const empoyee = require('./routes/Employee.Routes');
+const leaves = require('./routes/Leaves.Router');
 // const product = require('./routes/product');
 // const order = require('./routes/order');
 
 //use Routes
 app.use('/api/v1/user', user)
 app.use('/api/v1/employee',empoyee)
+app.use('/api/v1/leaves',leaves)
 // app.use('/product', product)
 // app.use('/order', order)
 
