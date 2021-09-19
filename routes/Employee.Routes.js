@@ -7,7 +7,7 @@ const { addEmployee, getEmployees, getEmployeeById, deleteEmployee, updateEmploy
 router.route('/addemployee').post(addEmployee);
 router.route('/getemployee').get(getEmployees);
 router.route('/getemployeebyid/:id').get(getEmployeeById);
-router.route('/deleteemployee/:id').get(deleteEmployee);
+router.route('/deleteemployee/:id').delete(deleteEmployee);
 router.route('/updateemployee/:id').put(updateEmployee)
 
 
