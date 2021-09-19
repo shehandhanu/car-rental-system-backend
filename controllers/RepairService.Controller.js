@@ -67,7 +67,7 @@ exports.getReportOfService = async (req, res, next) => {
   });
 };
 
-////Get Details of quotations
+//Get Details of quotations
 exports.getListOfQuotations = async (req, res, next) => {
   const quotationOfService = await Service.find();
 
@@ -129,6 +129,26 @@ exports.deleteReportOfService = async (req, res, next) => {
   });
 };
 
+//Delete List of Qutations
+exports.deleteQuotations = async (req, res, next) => {
+  let quotationOfService = await Service.findById(req.params.id);
+
+  if (!quotationOfService) {
+    return res.status(404).json({
+      success: false,
+      message: "List of Quotations Not Found",
+    });
+  }
+
+  quotationOfService = await Service.findByIdAndDelete(req.params.id);
+
+  res.status(200).json({
+    success: true,
+    quotationOfService,
+    message: "Delete Successfull",
+  });
+};
+
 //check the Report of Service/Repair in a vehicle
 exports.checkedReportOfService = async (req, res, next) => {
   let reportid = req.params.id;
@@ -141,7 +161,6 @@ exports.checkedReportOfService = async (req, res, next) => {
     });
   }
 
-  console.log(report);
   report = await Service.updateOne(
     { _id: reportid },
     { isChecked: true },
@@ -151,11 +170,39 @@ exports.checkedReportOfService = async (req, res, next) => {
     }
   );
 
-  console.log(report + " 22222");
   report = await Service.findById(reportid);
 
   res.status(200).json({
     success: true,
     report,
+  });
+};
+
+//approve the quotations
+exports.approveQuotations = async (req, res, next) => {
+  let quotationid = req.params.id;
+  let quotations = await Service.findById(quotationid);
+
+  if (!quotations) {
+    res.status(404).json({
+      success: false,
+      message: "Quotations Found",
+    });
+  }
+
+  quotations = await Service.updateOne(
+    { _id: quotationid },
+    { isApproved: true },
+    {
+      new: true,
+      useFindAndModify: false,
+    }
+  );
+
+  quotations = await Service.findById(quotationid);
+
+  res.status(200).json({
+    success: true,
+    quotations,
   });
 };
