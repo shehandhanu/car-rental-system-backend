@@ -1,52 +1,51 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const vehicalSchema = new mongoose.Schema({
+  vehicleNumber: {
+    type: String,
+  },
+  vehicleName: {
+    type: String,
+  },
+  vehicleCategory: {
+    type: String,
+  },
+  manufactureYear: {
+    type: String,
+  },
+  vehicleSupplier: {
+    type: String,
+  },
+  vehicleColor: {
+    type: String,
+  },
+  vehicleType: {
+    type: String,
+  },
+  vehiclePrice: {
+    type: String,
+  },
+  vehicleCondition: {
+    type: String,
+  },
+  mileage: {
+    type: String,
+  },
+  fuelType: {
+    type: String,
+  },
+  registerDate: {
+    type: Date,
+  },
+  specification: {
+    type: String,
+  },
+  vehicleStatus: {
+    type: String,
+  },
+  vehicleImage: {
+    type: String,
+  },
+});
 
-    vehicleNumber: {
-        type: String,
-    },
-    vehicleName: {
-        type: String,
-    },
-    vehicleCategory: {
-        type: String,
-    },
-    manufactureYear: {
-        type: String,
-    },
-    vehicleSupplier: {
-        type: String,
-    },
-    vehicleColor: {
-        type: String,
-    },
-    vehicleType: {
-        type: String,
-    },
-    vehiclePrice: {
-        type: String,
-    },
-    vehicleCondition: {
-        type: String,
-    },
-    mileage: {
-        type: String,
-    },
-    fuelType: {
-        type: String,
-    },
-    registerDate: {
-        type: Date,
-    },
-    specification: {
-        type: String,
-    },
-    vehicleStatus: {
-        type: String,
-    },
-    vehicleImage: {
-        type: String,
-    },
-})
-
-module.exports = mongoose.model('Vehical', vehicalSchema)
+module.exports = mongoose.model("Vehical", vehicalSchema);
