@@ -51,6 +51,10 @@ const repairServiceSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isDeleted: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("Service", repairServiceSchema);

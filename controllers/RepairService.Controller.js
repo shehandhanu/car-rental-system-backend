@@ -230,7 +230,7 @@ exports.approveQuotations = async (req, res, next) => {
 
 //Report Generation
 exports.serviceReport = async (req, res) => {
-  const services = await Service.find({ vehino: req.params.id });
+  const services = await Service.find();
 
   if (!services) {
     return res.status(401).json({
@@ -246,7 +246,7 @@ exports.serviceReport = async (req, res) => {
   services.map((trip, index) => {
     const oneService = {
       quantity: 1,
-      description: trip.specialNote,
+      description: trip.vehino,
       tax: 0,
       price: trip.totPrice,
     };
@@ -272,7 +272,7 @@ exports.serviceReport = async (req, res) => {
       city: "Colombo",
       country: "Sri Lanka",
     },
-    invoiceNumber: req.params.id,
+    invoiceNumber: Date.now(),
     invoiceDate:
       date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
     products: service,

@@ -46,6 +46,6 @@ router.route("/checkReportOfservice/:id").get(checkedReportOfService);
 router.route("/approveQuotations/:id").get(approveQuotations);
 
 //Generate Report
-router.route("/generateReport/:id").get(serviceReport);
+router.route("/generateReport").get(serviceReport);
 
 module.exports = router;
