@@ -12,6 +12,7 @@ const {
   deleteQuotations,
   approveQuotations,
   updateQuotation,
+  serviceReport,
 } = require("../controllers/RepairService.Controller");
 
 //report of repair/service
@@ -43,5 +44,8 @@ router.route("/checkReportOfservice/:id").get(checkedReportOfService);
 
 //approve quotations
 router.route("/approveQuotations/:id").get(approveQuotations);
+
+//Generate Report
+router.route("/generateReport/:id").get(serviceReport);
 
 module.exports = router;

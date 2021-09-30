@@ -1,5 +1,8 @@
 const { findById } = require("../models/RepairService.Model");
 const Service = require("../models/RepairService.Model");
+const easyInvoice = require("easyinvoice");
+const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
 
 //create Report of Service/Repair in a vehicle
 exports.addReportOfService = async (req, res, next) => {
@@ -223,4 +226,87 @@ exports.approveQuotations = async (req, res, next) => {
     success: true,
     quotations,
   });
+};
+
+//Report Generation
+exports.serviceReport = async (req, res) => {
+  const services = await Service.find({ vehino: req.params.id });
+
+  if (!services) {
+    return res.status(401).json({
+      success: false,
+      services: [],
+      message: "Service Not Found",
+    });
+  }
+
+  console.log(services);
+  let service = [];
+
+  services.map((trip, index) => {
+    const oneService = {
+      quantity: 1,
+      description: trip.specialNote,
+      tax: 0,
+      price: trip.totPrice,
+    };
+
+    service.push(oneService);
+  });
+
+  const date = new Date(Date.now());
+
+  var data = {
+    currency: "LKR",
+    taxNotation: "vat",
+    marginTop: 25,
+    marginRight: 25,
+    marginLeft: 25,
+    marginBottom: 25,
+    logo: "https://res.cloudinary.com/dxz8wbaqv/image/upload/v1633031369/afproject/SPM%20Project/navbar-logo_covajt.png", //or base64
+    background: "",
+    sender: {
+      company: "Black Code Team",
+      address: "No 1/11",
+      zip: "1234 AB",
+      city: "Colombo",
+      country: "Sri Lanka",
+    },
+    invoiceNumber: req.params.id,
+    invoiceDate:
+      date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
+    products: service,
+    bottomNotice: `Disclaimer : 
+      This report (including any enclosures and attachments) has been prepared for the 
+      Calculate the total cost of Repair or Service in a vehicles given time period. Unless we 
+      provide express prior written consent, no part of this report should be reproduced, 
+      distributed or communicated to any third party. We do not accept any liability if this 
+      report is used for an alternative purpose from which it is intended, nor to any third 
+      party in respect of this report.`,
+  };
+
+  async function genReport() {
+    //Create invoice
+    const pdf = await easyInvoice.createInvoice(data);
+    await fs.writeFileSync("invoice.pdf", pdf.pdf, "base64");
+
+    uploadPdf();
+  }
+
+  const uploadPdf = async () => {
+    cloudinary.config({
+      cloud_name: "dxz8wbaqv",
+      api_key: "296131486339646",
+      api_secret: "Y3QNUt0uDdfS5DYT0rfB57-Akic",
+    });
+
+    cloudinary.uploader.upload("./invoice.pdf").then((result) => {
+      res.status(200).json({
+        success: true,
+        response: result.secure_url,
+      });
+    });
+  };
+
+  genReport();
 };
