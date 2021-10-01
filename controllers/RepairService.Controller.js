@@ -166,7 +166,7 @@ exports.deleteQuotationsServiceManager = async (req, res, next) => {
     });
   }
 
-  if (quotationOfService.isDeleted == 1) {
+  if (quotationOfService.isDeleted == 1 || quotationOfService.isDeleted == 4) {
     quotationOfService = await Service.findByIdAndUpdate(req.params.id, {
       isDeleted: 4,
     });
@@ -194,7 +194,7 @@ exports.deleteQuotationsOwner = async (req, res, next) => {
     });
   }
 
-  if (quotationOfService.isDeleted == 2) {
+  if (quotationOfService.isDeleted == 2 || quotationOfService.isDeleted == 4) {
     quotationOfService = await Service.findByIdAndUpdate(req.params.id, {
       isDeleted: 4,
     });

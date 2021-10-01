@@ -1,4 +1,5 @@
 const Employee = require('../models/Employee.Model')
+const User = require('../models/User.Model')
 const sendToken = require('../utils/jwtToken');
 
 //add Employee
@@ -11,6 +12,22 @@ exports.addEmployee = async (req, res) => {
             message: 'Add employee was failed'
         })
     }
+
+    const user = await User.create({
+        firstName: req.body.fName,
+        lastName: req.body.fName,
+        email: req.body.email,
+        password: req.body.password,
+        avatar: {
+            public_id: "sampleid",
+            url: "https://res.cloudinary.com/dxz8wbaqv/image/upload/v1624880648/afproject/images_jjljf9.png"
+        },
+        birthday: Date.now(),
+        phoneNumber: "0115557788",
+        role: "Employee",
+        empID: emp._id,
+        verifiedAccount: true
+    })
 
     res.status(200).json({
         success: true,
@@ -75,10 +92,10 @@ exports.getEmployees = async (req, res) => {
 }
 
 //get employees By Id
-exports.getEmployeeById = async(req,res) =>{
+exports.getEmployeeById = async (req, res) => {
     const emp = await Employee.findById(req.params.id)
 
-    if(!emp){
+    if (!emp) {
         res.status(401).json({
             success: false,
             message: 'get employee was failed'
@@ -91,10 +108,10 @@ exports.getEmployeeById = async(req,res) =>{
     })
 }
 
-exports.deleteEmployee = async (req,res) =>{
+exports.deleteEmployee = async (req, res) => {
     const emp = await Employee.findByIdAndDelete(req.params.id)
 
-    if(!emp){
+    if (!emp) {
         res.status(401).json({
             success: false,
             message: 'delete employee was failed'

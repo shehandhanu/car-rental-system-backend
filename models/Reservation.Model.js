@@ -27,7 +27,7 @@ const reservationSchema = mongoose.Schema({
     },
     paymentDetails: {
         cardNumber: {
-            type: Number,
+            type: String,
         },
         cardOwnerName: {
             type: String,

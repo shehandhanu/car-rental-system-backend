@@ -60,6 +60,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    empID: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Employee'
+    },
     reservations: [
         {
             reservationID: {

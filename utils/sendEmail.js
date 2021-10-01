@@ -4,7 +4,7 @@ const sendEmail = async (type, data) => {
 
     var sendEmail = nodemailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 465,
+        port: 587,
         secure: true,
         service: 'gmail',
         auth: {
@@ -33,7 +33,7 @@ const sendEmail = async (type, data) => {
                 To Verify Account Please User Link Below
                  ${url} `,
             }
-
+            console.log("email send 1");
         }
             break;
         case 2: {
@@ -53,47 +53,48 @@ const sendEmail = async (type, data) => {
                 //     path: "./invoice.pdf"
                 // }
             }
+            console.log("email send 1");
 
         }
             break;
 
-            case 4: {
+        case 4: {
 
-                var mailOption = {
-                    from: 'blackcodeteam1st@gmail.com',
-                    to: data.email,
-                    subject: 'Welcome to Black Code Car Rental System',
-                    text: `Hi ${data.emName}
+            var mailOption = {
+                from: 'blackcodeteam1st@gmail.com',
+                to: data.email,
+                subject: 'Welcome to Black Code Car Rental System',
+                text: `Hi ${data.emName}
                         Your Leave has Approved
                         
                     `,
-                    // attachments: {
-                    //     filename: 'invoice.pdf',
-                    //     path: "./invoice.pdf"
-                    // }
-                }
-    
+                // attachments: {
+                //     filename: 'invoice.pdf',
+                //     path: "./invoice.pdf"
+                // }
             }
+
+        }
 
             break;
 
-            case 5: {
+        case 5: {
 
-                var mailOption = {
-                    from: 'blackcodeteam1st@gmail.com',
-                    to: data.email,
-                    subject: 'Welcome to Black Code Car Rental System',
-                    text: `Hi ${data.emName}
+            var mailOption = {
+                from: 'blackcodeteam1st@gmail.com',
+                to: data.email,
+                subject: 'Welcome to Black Code Car Rental System',
+                text: `Hi ${data.emName}
                         Your Leave has Rejected
                         
                     `,
-                    // attachments: {
-                    //     filename: 'invoice.pdf',
-                    //     path: "./invoice.pdf"
-                    // }
-                }
-    
+                // attachments: {
+                //     filename: 'invoice.pdf',
+                //     path: "./invoice.pdf"
+                // }
             }
+
+        }
 
         case 3: {
             var mailOption = {
