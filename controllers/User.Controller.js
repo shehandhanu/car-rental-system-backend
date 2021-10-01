@@ -66,6 +66,13 @@ exports.loginUser = async (req, res, next) => {
 
     const { email, password } = req.body;
 
+    if (!email || !password) {
+        return res.status(204).json({
+            success: false,
+            message: 'Email Or Password Empty'
+        })
+    }
+
     //finding user in data bsae
     const user = await User.findOne({ email }).select('+password');
 
@@ -80,7 +87,16 @@ exports.loginUser = async (req, res, next) => {
         return next(new ErrorHandler('Invalid Email Or Password', 401));
     }
 
-    sendToken(user, 200, res);
+    const tokendata = await sendToken(user);
+
+    const token = tokendata.token
+    const option = tokendata.option
+
+    res.status(200).cookie('token', token, option).json({
+        success: true,
+        token,
+        user
+    })
 }
 
 //change password => apiv1/password/update      
@@ -104,10 +120,7 @@ exports.updatePassword = async (req, res, next) => {
 //update user profile   => api/v1/user/update
 exports.updateProfile = async (req, res, next) => {
 
-    const newUserData = {
-        name: req.body.name,
-        email: req.body.email
-    }
+    const newUserData = req.body
 
     //update avater TODO
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
@@ -126,7 +139,7 @@ exports.updateProfile = async (req, res, next) => {
 //get current user  => /api/v1/user
 exports.getUserProfile = async (req, res, next) => {
 
-    const user = await User.findById(req.user.id);
+    let user = await User.findOne({ _id: req.user.id }).populate('reservations.reservationID')
 
     if (!user) {
         return res.status(401).json({
@@ -156,15 +169,17 @@ exports.forgotPassword = async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     //create reset url 
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
+    const resetUrl = `${req.protocol}://http://localhost:3000/changepassword/${resetToken}`;
     const message = `your password reset token is as follow : \n\n ${resetUrl}\n\n if you have not requested this email, then ignore it.`;
 
+    const data = {
+        subject: 'Black Code Car Rental Password Recovery',
+        message,
+        user
+    }
+
     try {
-        await sendEmail({
-            email: user.email,
-            subject: 'React Js Password Recovery',
-            message
-        })
+        await sendEmail(3, data)
 
         res.status(200).json({
             success: true,
@@ -209,7 +224,16 @@ exports.resetPassword = async (req, res, next) => {
 
     await user.save();
 
-    sendToken(user, 200, res);
+    const tokendata = await sendToken(user);
+
+    const token = tokendata.token
+    const option = tokendata.option
+
+    res.status(200).cookie('token', token, option).json({
+        success: true,
+        token,
+        user
+    })
 
 }
 

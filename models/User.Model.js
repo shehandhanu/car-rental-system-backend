@@ -60,6 +60,14 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    reservations: [
+        {
+            reservationID: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'Reservation'
+            }
+        }
+    ],
     resetPasswordToken: String,
     resetPasswordExpire: Date
 
@@ -100,7 +108,7 @@ userSchema.methods.getResetPasswordToken = function () {
     //set token expire timestamp
     this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
 
-    console.log(resetPasswordToken);
+    console.log(this.resetPasswordToken);
 
     return this.resetPasswordToken;
 
