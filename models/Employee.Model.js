@@ -1,61 +1,68 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const jwt = require('jsonwebtoken');
 
 const employeeSchema = mongoose.Schema({
-    fName:{
+    fName: {
         type: String,
-        required:true
+        required: true
     },
-    Nic:{
+    Nic: {
         type: String,
-        required:true
+        required: true
     },
-    emCoNo:{
+    emCoNo: {
         type: Number,
-        required:true
+        required: true
     },
-    email:{
+    email: {
         type: String,
         required: [true, 'Please Enter Your Email'],
         unique: true,
         validate: [validator.isEmail, 'Please Enter Valid Email Address']
     },
-    password:{
+    password: {
         type: String,
         required: [true, 'Please Enter Password'],
         minLength: [5, 'Your Password must be longer than 5 characters'],
         select: false
     },
-    age:{
+    age: {
         type: Number,
-        required:true
+        required: true
     },
-    emAddress:{
-        line1:{
+    emAddress: {
+        line1: {
             type: String,
-            required:true
+            required: true
         },
-        line2:{
+        line2: {
             type: String,
-            required:true
+            required: true
         },
-        city:{
+        city: {
             type: String,
-            required:true
+            required: true
         },
-        state:{
+        state: {
             type: String,
-            required:true
+            required: true
         }
     },
-    gender:{
+    gender: {
         type: String,
-        required:true
+        required: true
     },
-    emType:{
+    emType: {
         type: String,
-        required:true
+        required: true
     }
 })
 
-module.exports = mongoose.model('Employee',employeeSchema)
+employeeSchema.methods.getJwtToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_TIME
+    });
+}
+
+module.exports = mongoose.model('Employee', employeeSchema)

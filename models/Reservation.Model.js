@@ -24,6 +24,20 @@ const reservationSchema = mongoose.Schema({
     isPaid: {
         type: Boolean,
         default: false
+    },
+    paymentDetails: {
+        cardNumber: {
+            type: Number,
+        },
+        cardOwnerName: {
+            type: String,
+        },
+        expireDate: {
+            type: Date,
+        },
+        cvv: {
+            type: Number,
+        }
     }
 })
 
