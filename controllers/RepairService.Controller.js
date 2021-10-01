@@ -150,8 +150,13 @@ exports.deleteReportOfService = async (req, res, next) => {
   });
 };
 
+// 0 defalt
+// 1 owner delete
+// 2 manager delete
+// 4  both delete
+
 //Delete List of Qutations
-exports.deleteQuotations = async (req, res, next) => {
+exports.deleteQuotationsServiceManager = async (req, res, next) => {
   let quotationOfService = await Service.findById(req.params.id);
 
   if (!quotationOfService) {
@@ -161,7 +166,43 @@ exports.deleteQuotations = async (req, res, next) => {
     });
   }
 
-  quotationOfService = await Service.findByIdAndDelete(req.params.id);
+  if (quotationOfService.isDeleted == 1) {
+    quotationOfService = await Service.findByIdAndUpdate(req.params.id, {
+      isDeleted: 4,
+    });
+  } else {
+    quotationOfService = await Service.findByIdAndUpdate(req.params.id, {
+      isDeleted: 2,
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    quotationOfService,
+    message: "Delete Successfull",
+  });
+};
+
+//Delete List of Qutations
+exports.deleteQuotationsOwner = async (req, res, next) => {
+  let quotationOfService = await Service.findById(req.params.id);
+
+  if (!quotationOfService) {
+    return res.status(404).json({
+      success: false,
+      message: "List of Quotations Not Found",
+    });
+  }
+
+  if (quotationOfService.isDeleted == 2) {
+    quotationOfService = await Service.findByIdAndUpdate(req.params.id, {
+      isDeleted: 4,
+    });
+  } else {
+    quotationOfService = await Service.findByIdAndUpdate(req.params.id, {
+      isDeleted: 1,
+    });
+  }
 
   res.status(200).json({
     success: true,

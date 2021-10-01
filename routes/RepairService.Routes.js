@@ -9,10 +9,11 @@ const {
   deleteReportOfService,
   checkedReportOfService,
   getListOfQuotations,
-  deleteQuotations,
   approveQuotations,
   updateQuotation,
   serviceReport,
+  deleteQuotationsServiceManager,
+  deleteQuotationsOwner,
 } = require("../controllers/RepairService.Controller");
 
 //report of repair/service
@@ -36,8 +37,13 @@ router.route("/updateQuotation/:id").post(updateQuotation);
 //get list of quotations
 router.route("/getListOfQuotations").get(getListOfQuotations);
 
-//delete list of quotations
-router.route("/deleteQuotations/:id").delete(deleteQuotations);
+//delete list of quotations manger
+router
+  .route("/deleteQuotationsManager/:id")
+  .delete(deleteQuotationsServiceManager);
+
+//delete list of quotations owner
+router.route("/deleteQuotationsOwner/:id").delete(deleteQuotationsOwner);
 
 //check report of services
 router.route("/checkReportOfservice/:id").get(checkedReportOfService);
