@@ -15,21 +15,19 @@ app.use(
 );
 
 //Import Routes
+const leaves = require('./routes/Leaves.Router');
 const user = require("./routes/User.Routes");
 const vehicals = require("./routes/Vehical.Routes");
 const empoyee = require("./routes/Employee.Routes");
-// const product = require('./routes/product');
-// const order = require('./routes/order');
 const owners = require("./routes/Owner.Routes");
 const reservation = require("./routes/Reservation.Routes");
 const services = require("./routes/RepairService.Routes");
 
 //use Routes
+app.use('/api/v1/leaves',leaves)
 app.use("/api/v1/user", user);
 app.use("/api/v1/vehical", vehicals);
 app.use("/api/v1/employee", empoyee);
-// app.use('/product', product)
-// app.use('/order', order)
 app.use("/api/v1/owner", owners);
 app.use("/api/v1/reservation", reservation);
 app.use("/api/v1/service", services);
