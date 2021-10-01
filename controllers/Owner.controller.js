@@ -12,7 +12,7 @@ exports.addOwner = async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    vehical,
+    owner,
   });
 };
 
@@ -26,7 +26,7 @@ exports.updateOwner = async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    vehical,
+    owner,
   });
 };
 
@@ -36,7 +36,7 @@ exports.deleteOwner = async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    vehical,
+    owner,
   });
 };
 
@@ -53,6 +53,6 @@ exports.getOwners = async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    vehical,
+    owner,
   });
 };
