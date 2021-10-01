@@ -50,7 +50,7 @@ exports.deleteVehical = async (req, res, next) => {
 //get current user  => /api/v1/user
 exports.getVehicals = async (req, res, next) => {
 
-    const vehical = await Vehical.find();
+    const vehical = await Vehical.find().populate('reservations.reservationID')
 
     if (!vehical) {
         return res.status(401).json({

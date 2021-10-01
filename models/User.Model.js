@@ -60,6 +60,14 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    reservations: [
+        {
+            reservationID: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'Reservation'
+            }
+        }
+    ],
     resetPasswordToken: String,
     resetPasswordExpire: Date
 

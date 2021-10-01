@@ -120,10 +120,7 @@ exports.updatePassword = async (req, res, next) => {
 //update user profile   => api/v1/user/update
 exports.updateProfile = async (req, res, next) => {
 
-    const newUserData = {
-        name: req.body.name,
-        email: req.body.email
-    }
+    const newUserData = req.body
 
     //update avater TODO
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
@@ -142,7 +139,7 @@ exports.updateProfile = async (req, res, next) => {
 //get current user  => /api/v1/user
 exports.getUserProfile = async (req, res, next) => {
 
-    const user = await User.findById(req.user.id);
+    let user = await User.findOne({ _id: req.user.id }).populate('reservations.reservationID')
 
     if (!user) {
         return res.status(401).json({
