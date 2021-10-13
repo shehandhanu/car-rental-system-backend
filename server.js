@@ -6,6 +6,6 @@ dotenv.config({ path: 'config/config.env' });
 
 connectDatabase();
 
-app.listen(process.env.PORT, () => {
+app.listen('https://blackcode-carrentalsystem-back.herokuapp.com/', () => {
     console.log(`Server Started at PORT ${process.env.PORT}`);
 })
