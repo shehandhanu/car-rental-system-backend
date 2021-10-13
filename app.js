@@ -28,7 +28,7 @@ app.use('/api/v1/leaves', leaves)
 app.use("/api/v1/user", user);
 app.use("/api/v1/vehical", vehicals);
 app.use("/api/v1/employee", empoyee);
-// app.use("/api/v1/owner", owners);
+app.use("/api/v1/owner", owners);
 app.use("/api/v1/reservation", reservation);
 app.use("/api/v1/service", services);
 
