@@ -6,7 +6,7 @@ const {
   getOwners,
   updateOwner,
   deleteOwner,
-} = require("../controllers/Owner.Controller");
+} = require("../controllers/Owner.controller");
 
 //Register User
 router.route("/addowner").post(addOwner);
