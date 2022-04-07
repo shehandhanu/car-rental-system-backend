@@ -25,6 +25,9 @@ router.route('/signin').post(loginUser);
 router.route('/logout').get(logout)
 
 //Get User Profile
+router.route('/profile').get(isAuthenticatedUser, getUserProfile);
+
+//Get User Profile
 router.route('/profile').post(isAuthenticatedUser, getUserProfile);
 
 //Get User Profile
