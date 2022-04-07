@@ -31,22 +31,22 @@ const userSchema = new mongoose.Schema({
     avatar: {
         public_id: {
             type: String,
-            required: true
+            // required: true
         },
         url: {
             type: String,
-            required: true
+            // required: true
         }
     },
     birthday: {
         type: Date,
-        required: true
+        // required: true
     },
     phoneNumber: {
         type: Number,
         minLength: [10, 'Your Password must be longer than 5 characters'],
         maxLength: [30, 'Your Last Name cannot exceed 30 characters'],
-        required: true
+        // required: true
     },
     role: {
         type: String,
