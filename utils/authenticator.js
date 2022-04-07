@@ -3,7 +3,13 @@ const jwt = require('jsonwebtoken');
 
 exports.isAuthenticatedUser = async (req, res, next) => {
 
-    const { token } = req.cookies;
+    const { token } = null;
+
+    if (req.cookies != null) {
+        token = req.cookies
+    } else {
+        token = req.body.token
+    }
 
     if (!token) {
         return res.status(401).json({
