@@ -3,13 +3,10 @@ const jwt = require('jsonwebtoken');
 
 exports.isAuthenticatedUser = async (req, res, next) => {
 
-    const { token } = null;
+    console.log("Works");
 
-    if (req.cookies != null) {
-        token = req.cookies
-    } else {
-        token = req.body.token
-    }
+    const token = req.headers;
+    console.log(token.authorization);
 
     if (!token) {
         return res.status(401).json({
@@ -18,7 +15,7 @@ exports.isAuthenticatedUser = async (req, res, next) => {
         })
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const decoded = jwt.verify(token.authorization, process.env.JWT_SECRET)
     req.user = await User.findById(decoded.id);
 
     next();

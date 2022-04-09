@@ -139,6 +139,8 @@ exports.updateProfile = async (req, res, next) => {
 //get current user  => /api/v1/user
 exports.getUserProfile = async (req, res, next) => {
 
+    console.log("works");
+
     let user = await User.findById(req.user.id).populate('reservations.reservationID')
         .populate('carID').populate('empID')
 
