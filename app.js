@@ -22,6 +22,8 @@ const empoyee = require("./routes/Employee.Routes");
 const owners = require("./routes/Owner.Routes");
 const reservation = require("./routes/Reservation.Routes");
 const services = require("./routes/RepairService.Routes");
+const slideShowMovie = require("./routes/slideShowMovie");
+const movieList = require("./routes/movieList");
 
 //use Routes
 app.use('/api/v1/leaves', leaves)
@@ -31,5 +33,7 @@ app.use("/api/v1/employee", empoyee);
 app.use("/api/v1/owner", owners);
 app.use("/api/v1/reservation", reservation);
 app.use("/api/v1/service", services);
+app.use("/slideShowMovie", slideShowMovie);
+app.use("/movieDetails", movieList);
 
 module.exports = app;
